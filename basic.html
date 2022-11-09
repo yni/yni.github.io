@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <title>Basic Calculator</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+        <script type="text/javascript" src="basic_calc.js"></script>
+<!--    <script type="text/javascript">
+        function greet() {
+            var deckSize = document.getElementById("deckSize");
+            var result = deckSize.value;
+            var output = document.getElementById("output");
+            output.innerHTML = "Hi, " + result + "!";
+        }
+-->
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1> Basic Calculator</h1>
+        <noscript>
+            <h2>To run the calcs on this site, please enable JavaScript in your browser.</h2>
+        </noscript>
+    </header>
+
+    <main>
+        <p>This is a basic calculator using deck size, hand size, and the number of starters.</p>
+        <p>It's for when you only need 1 card, such as 1-card starters or handtraps.</p>
+        <form>
+            <fieldset>
+                <p><label for="deckSize">Deck size: </label>
+                <input type="number" id="deckSize" value=40></p>
+                <p><label for="handSize">Hand size: </label>
+                <input type="number" id="handSize" value=5></p>
+                <p><label for="numStarters">Number of starters: </label>
+                <input type="number" id="numStarters" value=9></p>
+                <p><button type="button" onclick="basicCalc()">Calculate</button></p>
+                <p>Probability of at least 1 success: <span id="output">...click Calculate to run...</span></p>
+            </fieldset>
+        </form>
+
+    </main>
+
+    <footer>
+    </footer>
+
+</body>
+</html>
