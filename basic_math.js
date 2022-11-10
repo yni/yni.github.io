@@ -19,6 +19,7 @@ function choose(n, k) {
 }
 
 // calculate live probability
+// this has been replaced by distribution of exact probabilities
 function calculateProbability(deck, hand, starters) {
     if (starters > deck || hand > deck || deck <= 0 || hand <= 0 || starters <= 0) {
         return 0};
@@ -44,4 +45,11 @@ function generateBasicDistribution(deck, hand, starters) {
         distribution[i] = calculateExactProbability(deck, hand, starters, i);
     }
     return distribution;
+}
+
+// compare two distributions to create a hash of the difference
+function compareDistribution(distOld, distNew) {
+
+
+    
 }

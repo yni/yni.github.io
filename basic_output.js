@@ -23,11 +23,11 @@ function updateProbabilityOutput(distBasic) {
 // updates the probabilityTable element on form input change
 function updateProbabilityTable(distBasic) {
     var outputTable = document.getElementById("probabilityTableOutput");
-    outputTable.innerHTML = `<tr><td>Number of Matches</td><td>Probability of Exact Match</td>`
+    outputTable.innerHTML = `<tr><td bgcolor="lightgreen">Number of Matches</td><td bgcolor="lightgreen">Probability of Exact Match</td>`
  
     for (const [key, value] of Object.entries(distBasic)) {
         var displayProbability = (100 * value).toFixed(2).toString() + '%';
-        var newTableRow = `<tr><td align="right">${key}</td><td align="right">${displayProbability}</td></tr>`;
+        var newTableRow = `<tr><td align="right" bgcolor="white">${key}</td><td align="right" bgcolor="white">${displayProbability}</td></tr>`;
         outputTable.innerHTML += newTableRow;
     }
 }
