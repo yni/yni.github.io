@@ -106,6 +106,7 @@ function updateProbabilityGraph(distBasic, graphElementId = "barGraphOutput", sh
 
     if (showDelta) {
         var inputLabel = "Changes to Probability of Exact Match";
+        var yTitleText = "Changes to Probability";
         var bgColor = [];
         for (let i = 0; i < yValues.length; i++) {
             if (yValues[i] < 0) {
@@ -116,7 +117,9 @@ function updateProbabilityGraph(distBasic, graphElementId = "barGraphOutput", sh
         }
     } else {
         var inputLabel = "Probability of Drawing Exactly X Matches";
+        var yTitleText = "Probability";
         var bgColor = "blue";
+        
     }
 
     var myChart = new Chart(ctx, {
@@ -140,7 +143,7 @@ function updateProbabilityGraph(distBasic, graphElementId = "barGraphOutput", sh
                     },
                     title: {
                         display: true,
-                        text: 'Probability'
+                        text: yTitleText
                     }
                 }
             }
