@@ -119,22 +119,6 @@ function updateProbabilityGraph(distBasic, graphElementId = "barGraphOutput", sh
         var bgColor = "blue";
     }
 
-/*
-    // default color to blue. change to red vs. green if any yValues are negative
-    bgColor = "blue";
-    const negative = (element) => element < 0;
-    if (yValues.some(negative)) {
-        bgColor = [];
-        for (let i = 0; i < yValues.length; i++) {
-            if (yValues[i] < 0) {
-                bgColor.push("salmon");
-            } else {
-                bgColor.push("lime");
-            }
-        }
-    }
-*/
-
     var myChart = new Chart(ctx, {
         type: "bar",
         data: {
