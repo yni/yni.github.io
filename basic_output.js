@@ -2,7 +2,7 @@
 function updateAllOutput() {
     updateProbability();
     updateProbabilityTable();
-    createProbabilityGraph();
+    updateProbabilityGraph();
 }
 
 // updates the probabilityOutput element on form input change
@@ -33,7 +33,7 @@ function updateProbabilityTable() {
 }
 
 // update the bar graph on form input change
-function createProbabilityGraph() {
+function updateProbabilityGraph() {
     var deckSize = parseInt(document.getElementById("deckSize").value, 10);
     var handSize = parseInt(document.getElementById("handSize").value, 10);
     var numStarters = parseInt(document.getElementById("numStarters").value, 10); 
