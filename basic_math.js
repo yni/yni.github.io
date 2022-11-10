@@ -36,3 +36,12 @@ function calculateExactProbability(deck, hand, starters, hits) {
     var numHits = choose(starters, hits) * choose(deck - starters, hand - hits);
     return numHits/numPossibilities;
 }
+
+// generate a hash of the distribution that is later used to update outputs
+function generateBasicDistribution(deck, hand, starters) {
+    var distribution = {};
+    for (let i = 0; i < hand + 1; i++) {
+        distribution[i] = calculateExactProbability(deck, hand, starters, i);
+    }
+    return distribution;
+}

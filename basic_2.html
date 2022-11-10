@@ -15,11 +15,11 @@
     
     <main>
         <form>
-            <p><label for="deckSize">Deck Size:</label><input type="number" id="deckSize" value=40 oninput="updateAllOutput()"></p>
-            <p><label for="handSize">Hand Size:</label><input type="number" id="handSize" value=5 oninput="updateAllOutput()"></p>
-            <p><label for="numStarters">Number of Starters:</label><input type="number" id="numStarters" value=9 oninput="updateAllOutput()"></p>
+            <p><label for="deckSize">Deck Size:</label><input type="number" id="deckSize" value=40 oninput="updateAllOutput()" min=0 max=60></p>
+            <p><label for="handSize">Hand Size:</label><input type="number" id="handSize" value=5 oninput="updateAllOutput()" min=0></p>
+            <p><label for="numStarters">Number of Starters:</label><input type="number" id="numStarters" value=9 oninput="updateAllOutput()" min=0></p>
         </form>
-        <p>Probability of at least 1 success: <span id="probabilityOutput"><script>updateProbability()</script></span></p>
+        <p>Probability of at Least 1 Match: <span id="probabilityOutput"><script>updateProbability()</script></span></p>
         <table style="width:100%" class="bdrless">
             <tr><td>
                 <canvas id="barGraphOutput" style="width:100%;max-width:700px;border:1px solid;max-height:500px"></canvas>
@@ -29,6 +29,14 @@
             </td>
             </tr>
         </table>
+
+<!--
+        <div class="grid-container">
+            <div class="grid-item"><canvas id="barGraphOutput" style="width:100%;max-width:700px;border:1px solid;max-height:500px"></canvas></div>
+            <div class="grid-item"><table id="probabilityTableOutput" class="bdr"></table></div>
+            <div class="grid-item">HI</div>
+        </div>
+-->
         <script>
             updateAllOutput();
         </script>

@@ -1,56 +1,50 @@
 // updates all output
 function updateAllOutput() {
-    updateProbability();
-    updateProbabilityTable();
-    updateProbabilityGraph();
-}
-
-// updates the probabilityOutput element on form input change
-function updateProbability() {
     var deckSize = parseInt(document.getElementById("deckSize").value, 10);
     var handSize = parseInt(document.getElementById("handSize").value, 10);
     var numStarters = parseInt(document.getElementById("numStarters").value, 10);
-    var liveProbability = calculateProbability(deckSize, handSize, numStarters);
+    var basicDistribution = generateBasicDistribution(deckSize, handSize, numStarters);
+
+    updateProbabilityOutput(basicDistribution);
+    updateProbabilityTable(basicDistribution);
+    updateProbabilityGraph(basicDistribution);
+}
+
+// updates the probabilityOutput element on form input change
+function updateProbabilityOutput(distBasic) {
+    var liveProbability = 0;
+    for (const [key, value] of Object.entries(distBasic)) {
+        if (key > 0) {liveProbability += value}
+    }
     var output = document.getElementById("probabilityOutput");
     output.innerHTML = (100 * liveProbability).toFixed(2).toString() + '%';
 }
 
 // updates the probabilityTable element on form input change
-function updateProbabilityTable() {
-    var deckSize = parseInt(document.getElementById("deckSize").value, 10);
-    var handSize = parseInt(document.getElementById("handSize").value, 10);
-    var numStarters = parseInt(document.getElementById("numStarters").value, 10);
+function updateProbabilityTable(distBasic) {
     var outputTable = document.getElementById("probabilityTableOutput");
-
     outputTable.innerHTML = `<tr><td>Number of Matches</td><td>Probability of Exact Match</td>`
-    
-    for (let i = 0; i < handSize + 1; i++) {
-        var iProbability = calculateExactProbability(deckSize, handSize, numStarters, i);
-        iProbability = (100 * iProbability).toFixed(2).toString() + '%';
-        var newTableRow = `<tr><td>${i}</td><td>${iProbability}</td></tr>`;
+ 
+    for (const [key, value] of Object.entries(distBasic)) {
+        var displayProbability = (100 * value).toFixed(2).toString() + '%';
+        var newTableRow = `<tr><td>${key}</td><td>${displayProbability}</td></tr>`;
         outputTable.innerHTML += newTableRow;
-    } 
+    }
 }
 
 // update the bar graph on form input change
-function updateProbabilityGraph() {
-    var deckSize = parseInt(document.getElementById("deckSize").value, 10);
-    var handSize = parseInt(document.getElementById("handSize").value, 10);
-    var numStarters = parseInt(document.getElementById("numStarters").value, 10); 
-    
+function updateProbabilityGraph(distBasic) {
     let chartStatus = Chart.getChart("barGraphOutput"); // <canvas> id
     if (chartStatus != undefined) {
       chartStatus.destroy();
     }
 
     let ctx = document.getElementById("barGraphOutput");
-
     var xValues = [];
     var yValues = [];
-
-    for (let i = 0; i < handSize + 1; i++) {
-        xValues[i] = i;
-        yValues[i] = calculateExactProbability(deckSize, handSize, numStarters, i);
+    for (const [key, value] of Object.entries(distBasic)) {
+        xValues.push(key);
+        yValues.push(value);
     }
 
     var myChart = new Chart(ctx, {

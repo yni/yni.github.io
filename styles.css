@@ -31,9 +31,79 @@ table, th, td {
 }
 
 table.bdrless td{
-   border-width: 0px;
+    border-width: 0px;
 }
 
 table.bdr td{
    border: 0.5px solid;
 }
+
+/*
+.grid-container {
+  display: grid;
+  gap: 50px 100px;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+*/
+
+/*
+input[type=number] {
+    height: 30px;
+}
+
+input[type=number]:hover::-webkit-inner-spin-button {  
+    width: 30px;
+    height: 30px;
+}
+*/
+
+
+/*
+input {
+      color: #777;
+      width: 2em;
+      font-size: 2em;
+      border-radius: 10px;
+      border: 2px solid #ccc;
+      padding: 5px;
+      padding-left: 10px;
+    }
+    input[type=number]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      cursor: pointer;
+      display: block;
+      width: 10px;
+      text-align: center;
+      position: relative;
+      background: transparent;
+    }
+    input[type=number]::-webkit-inner-spin-button::before,
+    input[type=number]::-webkit-inner-spin-button::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-bottom: 10px solid #777;
+    }
+    input[type=number]::-webkit-inner-spin-button::before {
+      top: 7px;
+    }
+    input[type=number]::-webkit-inner-spin-button::after {
+      bottom: 7px;
+      transform: rotate(180deg);
+    }
+}
+*/
