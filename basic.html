@@ -4,15 +4,10 @@
 <head>
     <title>Basic Calculator</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
-        <script type="text/javascript" src="basic_calc.js"></script>
-<!--    <script type="text/javascript">
-        function greet() {
-            var deckSize = document.getElementById("deckSize");
-            var result = deckSize.value;
-            var output = document.getElementById("output");
-            output.innerHTML = "Hi, " + result + "!";
-        }
--->
+    <script type="text/javascript" src="basic_calc.js"></script>
+    </script>
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
     </script>
 </head>
 
@@ -26,7 +21,9 @@
 
     <main>
         <p>This is a basic calculator using deck size, hand size, and the number of starters.</p>
-        <p>It's for when you only need 1 card, such as 1-card starters or handtraps.</p>
+        <p>It's for when you need only 1 card, such as with 1-card starters or handtraps.</p>
+
+
         <form>
             <fieldset>
                 <p><label for="deckSize">Deck size: </label>
@@ -37,9 +34,14 @@
                 <input type="number" id="numStarters" value=9></p>
                 <p><button type="button" onclick="basicCalc()">Calculate</button></p>
                 <p>Probability of at least 1 success: <span id="output">...click Calculate to run...</span></p>
+                <p><button type="button" onclick="graphDistribution()">Graph distribution</button></p>
             </fieldset>
         </form>
 
+        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        
+            </fieldset>
+        </form>
     </main>
 
     <footer>
