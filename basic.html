@@ -5,10 +5,12 @@
     <title>Basic Calculator</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <script type="text/javascript" src="basic_calc.js"></script>
-    </script>
-    <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
-    </script>
+    <script type="text/javascript" src="graph_calc.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+-->
 </head>
 
 <body>
@@ -23,7 +25,6 @@
         <p>This is a basic calculator using deck size, hand size, and the number of starters.</p>
         <p>It's for when you need only 1 card, such as with 1-card starters or handtraps.</p>
 
-
         <form>
             <fieldset>
                 <p><label for="deckSize">Deck size: </label>
@@ -34,14 +35,20 @@
                 <input type="number" id="numStarters" value=9></p>
                 <p><button type="button" onclick="basicCalc()">Calculate</button></p>
                 <p>Probability of at least 1 success: <span id="output">...click Calculate to run...</span></p>
-                <p><button type="button" onclick="graphDistribution()">Graph distribution</button></p>
+                <p><button type="button" onclick="graphScatter()">Scatter Graph</button></p>
+                <p><button type="button" onclick="graphBar()">Bar Graph</button></p>
             </fieldset>
         </form>
-
-        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        <div style="width: 50%; height: 400px; float: left; background: lightgreen;"> 
+            Scatter Plot
+            <canvas id="myScatterChart" style="width:100%;max-width:700px"></canvas>
+        </div>
+        <div style="margin-left: 50%; height: 400px; background: lightblue;"> 
+            Bar Plot
+            <canvas id="myBarChart" style="width:100%;max-width:700px"></canvas>
+        </div>
         
-            </fieldset>
-        </form>
+        
     </main>
 
     <footer>
