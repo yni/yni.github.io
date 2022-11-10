@@ -69,7 +69,7 @@ function createProbabilityGraph() {
                 y: {
                     ticks: {
                         callback: function(value, index, ticks) {
-                            return (100 * value) + '%';
+                            return (100 * value).toFixed(0) + '%';
                         }
                     },
                     title: {
