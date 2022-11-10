@@ -27,7 +27,7 @@ function updateProbabilityTable(distBasic) {
  
     for (const [key, value] of Object.entries(distBasic)) {
         var displayProbability = (100 * value).toFixed(2).toString() + '%';
-        var newTableRow = `<tr><td>${key}</td><td>${displayProbability}</td></tr>`;
+        var newTableRow = `<tr><td align="right">${key}</td><td align="right">${displayProbability}</td></tr>`;
         outputTable.innerHTML += newTableRow;
     }
 }
