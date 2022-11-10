@@ -26,3 +26,14 @@ h1 {
 a {
     color:  black;
 }
+table, th, td {
+  border: 0.5px solid;
+}
+
+table.bdrless td{
+   border-width: 0px;
+}
+
+table.bdr td{
+   border: 0.5px solid;
+}
