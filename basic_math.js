@@ -28,6 +28,15 @@ function calculateProbability(deck, hand, starters) {
     return (1 - numBricks/numPossibilities);
 }
 
+// calcuate live probability from distribution
+function calculateProbabilityFromDistribution(distBasic) {
+    var liveProbability = 0;
+    for (const [key, value] of Object.entries(distBasic)) {
+        if (key > 0) {liveProbability += value}
+    }
+    return liveProbability;
+}
+
 // calculate probability of getting an exact number of hits
 function calculateExactProbability(deck, hand, starters, hits) {
     if (starters > deck || hand > deck || hits > hand) {
@@ -49,7 +58,22 @@ function generateBasicDistribution(deck, hand, starters) {
 
 // compare two distributions to create a hash of the difference
 function compareDistribution(distOld, distNew) {
-
-
+    var oldKeys = Object.keys(distOld);
+    var newKeys = Object.keys(distNew);
+    var uniqueKeys = [...new Set(oldKeys.concat(newKeys))];
     
+    var difference = {};
+    for (let i = 0; i < uniqueKeys.length; i++) {
+        var k = uniqueKeys[i];
+        if ((k in oldKeys) && (k in newKeys)) {
+            difference[k] = distNew[k] - distOld[k]
+        } else if (!(k in oldKeys)) {
+            difference[k] = distNew[k]
+        } else if (!(k in newKeys)) {
+            difference[k] = -1 * distOld[k]
+        } else {
+            difference[k] = 0
+        }
+    };
+    return difference;
 }

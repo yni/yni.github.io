@@ -14,18 +14,45 @@
     </header>
     
     <main>
-        <form>
-            <p><label for="deckSize">Deck Size:</label><input type="number" id="deckSize" value=40 oninput="updateAllOutput()" min=0 max=60></p>
-            <p><label for="handSize">Hand Size:</label><input type="number" id="handSize" value=5 oninput="updateAllOutput()" min=0></p>
-            <p><label for="numStarters">Number of Starters:</label><input type="number" id="numStarters" value=9 oninput="updateAllOutput()" min=0></p>
-        </form>
-        <p>Probability of at Least 1 Match: <span id="probabilityOutput"><script>updateProbability()</script></span></p>
+        <table style="width:100%" class="bdrlessinputs">
+            <tr><td>
+                <form>
+                    <p><h2>Deck Inputs</h2></p>
+                    <p><label for="deckSize">Deck Size:</label><input type="number" id="deckSize" value=40 oninput="updateAllOutput()" min=0 max=60></p>
+                    <p><label for="handSize">Hand Size:</label><input type="number" id="handSize" value=5 oninput="updateAllOutput()" min=0></p>
+                    <p><label for="numStarters">Number of Starters:</label><input type="number" id="numStarters" value=9 oninput="updateAllOutput()" min=0 max=60></p>
+                </form>
+                <p>Probability of at Least 1 Match: <span id="probabilityOutput"></span></p>
+            </td>
+            <td>
+                <form>
+                    <p><h2>Comparison Options</h2></p>
+                    <p><label for="deckDelta">Change Deck Size:</label><input type="number" id="deckDelta" value=0 oninput="updateDeltaOutput()"></p>
+                    <p><label for="handDelta">Change Hand Size:</label><input type="number" id="handDelta" value=0 oninput="updateDeltaOutput()"></p>
+                    <p><label for="startersDelta">Change Number of Starters:</label><input type="number" id="startersDelta" value=0 oninput="updateDeltaOutput()"></p>
+                    <p><input type="submit" id="resetDelta" onclick="resetDelta()" value="Reset Changes"></p>
+                </form>
+                <p>Probability of at Least 1 Match: <span id="probabilityOutputWithDelta"></span></p>
+                <p>Changes to Probability: <span id="probabilityDeta"></span></p>
+            </td>
+            </tr>
+        </table>
+
+        <script>updateProbability()</script>
+        
         <table style="width:100%" class="bdrless">
             <tr><td>
                 <canvas id="barGraphOutput" style="width:100%;max-width:700px;border:1px solid;max-height:500px"></canvas>
             </td>
             <td>
                 <table id="probabilityTableOutput" class="bdr"></table>
+            </td>
+            </tr>
+            <tr><td>
+                <canvas id="differenceGraphOutput" style="width:100%;max-width:700px;border:1px solid;max-height:500px"></canvas>
+            </td>
+            <td>
+                <table id="differenceTableOutput" class="bdr"></table>
             </td>
             </tr>
         </table>

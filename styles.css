@@ -34,6 +34,11 @@ table.bdrless td{
     border-width: 0px;
 }
 
+table.bdrlessinputs td{
+    border-width: 0px;
+    vertical-align: top;
+}
+
 table.bdr td{
    border: 0.5px solid;
 }
@@ -58,12 +63,33 @@ table.bdr td{
 
 /*
 input[type=number] {
-    height: 30px;
+    height: 60px;
 }
 
 input[type=number]:hover::-webkit-inner-spin-button {  
     width: 30px;
     height: 30px;
+}
+*/
+
+
+/*
+input[type="number"].mod::-webkit-outer-spin-button, 
+input[type="number"].mod::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    background: #0F0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAKUlEQVQYlWNgwAT/sYhhKPiPT+F/LJgEsHv37v+EMGkmkuImoh2NoQAANlcun/q4OoYAAAAASUVORK5CYII=) no-repeat center center;
+    width: 30em;
+    border-left: 1px solid #0f0;
+    opacity: 0; //shows Spin Buttons per default (Chrome >= 39)
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+}
+input[type="number"].mod::-webkit-inner-spin-button:hover,
+input[type="number"].mod::-webkit-inner-spin-button:active{
+    box-shadow: 0 0 2px #0CF;
+    opacity: .7;
 }
 */
 
