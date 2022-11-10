@@ -15,6 +15,7 @@ function factorial(n) {
 function choose(n, k) {
     if (n < k) {return 0};
     if (n == k || k == 0) {return 1};
+    if (n == k) {return 1};
     return factorial(n)/factorial(k)/factorial(n - k);
 }
 
@@ -25,6 +26,12 @@ function calculateProbability(deck, hand, starters) {
     };
     var numPossibilities = choose(deck, hand);
     var numBricks = choose(deck - starters, hand);
+    
+function calculateProbability(deck, hand, starter) {
+    if (starter > deck || hand > deck) {
+        return 0};
+    var numPossibilities = choose(deck, hand);
+    var numBricks = choose(deck - starter, hand);
     return (1 - numBricks/numPossibilities);
 }
 
@@ -32,6 +39,7 @@ function basicCalc() {
     var deckSize = parseInt(document.getElementById("deckSize").value, 10);
     var handSize = parseInt(document.getElementById("handSize").value, 10);
     var numStarters = parseInt(document.getElementById("numStarters").value, 10); 
+    var numStarters = parseInt(document.getElementById("numStarters").value, 10);
     var liveProbability = calculateProbability(deckSize, handSize, numStarters);
     var output = document.getElementById("output");
     output.innerHTML = (100 * liveProbability).toFixed(2).toString() + '%';
