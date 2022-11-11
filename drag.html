@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Input</title>
+    <link rel="stylesheet" type="text/css" href="drag.css">
+    <script type="text/javascript" src="drag.js" defer></script>
+</head>
+
+<body>
+    <header>
+        <h1>Input</h1>
+    </header>
+    
+    <main>
+      <p>This is drag and drop practice for setting up decks and hands.</p>
+      <p>Drag from deck to hand as many times as you would like.</p>
+      <p>Can't drag from hand back to deck (obviously since deck should not change).</p>
+      <p>Drag from hand to trash to remove a card from the hand.</p>
+      <table>
+        <tr>
+        <td class="composition" id="deck">Deck
+          <span class="card" draggable="true">blank</span>
+          <span class="card" draggable="true">starter</span>
+        </td>
+        <td></td>
+        <td class="composition" id="trash">Trash
+        </td>
+        </tr>
+        <tr>
+        <td class="composition" id="hand">Hand (max 6)
+        </td>
+        </tr>
+      </table>
+    </main>
+</body>
+</html>

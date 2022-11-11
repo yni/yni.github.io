@@ -1,0 +1,36 @@
+.card {
+    float: left;
+    width: 50px;
+    height: 75px;
+    shape-outside: inset(20px 50px 10px 0 round 50px);
+/*    background-color: rebeccapurple;*/
+    background-color: orange;
+    border: 2px solid white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+/*
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid black;
+  cursor: move;
+*/
+}
+
+.composition {
+  float: left;
+  width: 680px; /* spacing for the last card looks off */
+  height: 115px;
+  background-color: darkgray;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.hand {
+
+}
+
+.tier {
+
+
+}
