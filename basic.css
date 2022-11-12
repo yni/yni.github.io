@@ -1,0 +1,44 @@
+-.row-heading
+{
+  font-size:1.3rem;
+  font-weight:bold;
+}
+.total
+{
+  font-size:2rem;
+  font-weight:bold;
+}
+.total-val
+{
+  font-size:2rem;
+  border:
+}
+
+body {
+    background-color: yellow;
+}
+p {
+    text-align: left;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:  black;
+}
+table, th, td {
+  border: 0.5px solid;
+}
+
+table.bdrless td{
+    border-width: 0px;
+}
+
+table.bdrlessinputs td{
+    border-width: 0px;
+    vertical-align: top;
+}
+
+table.bdr td{
+   border: 0.5px solid;
+}
