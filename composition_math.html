@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Constrained Weak Composition</title>
+</head>
+
+<body>
+  <header>
+    <h1>Constrained Weak Composition</h1>
+  </header>
+  
+  <main>
+<i>This implements the underlying algorithm for calculating opening hand probabilities, a method I'm calling "Constrained Weak Composition".</i>
+
+<p>A deck is represented by an array of numbers such as [3, 3, 3, 31], each element representing the number of copies of a card in the deck.
+Let's call these cards A, B, C, and Blanks for now.
+An "integer composition" for a hand of n cards is an array with the same number of elements with each element representing how many copies are drawn.
+For example, [2, 1, 0, 2] represents 2A + 1B + 0C + 2Blanks.</p>
+
+<p>We have a specialized version of integer composition problem because we have to support 0s as elements; drawing 5 cards out of 40 means many cards will show up at zero copies. Integer compositions with zeros are "weak".
+Another caveat is that the maximum number copies of each card is "constrained" by the deck; if there only 3 copies of A in the deck, we can't allow compositions that lead with [4, ...].</p>
+
+<p>Why use compositions?
+Using compositions will trivialize the next step in calculating probabilities when combined with the next step.</p>
+
+<p>Let's take 3 compositions of [3, 3, 3, 31] such as [2, 1, 0, 2], [3, 0, 2, 0] and [3, 0, 0, 2].
+These are 3 distinct hands.</p>
+
+<p>To do a probability calculation, we know the denominator is (40 choose 5) or exactly 658,008.</p>
+
+<p>Using the copies in the deck represented by [3, 3, 3, 31], we know how many copies of each card we have to chooose from.
+The composition represents how many of each card we are choosing.</p>
+
+<p>So for [2, 1, 0, 2], the formula would be (3 choose 2) * (3 choose 1) * (3 choose 0) * (31 choose 2) = 4185.
+The probability of that hand is 4185 / 658008 = 0.00636010504.</p>
+
+<p>For illustrative purposes, I'll also calculate out [3, 0, 2, 0] vs [3, 0, 0, 2] to show the impact of having only 3 copies of C in the deck vs. 31 copies of Blanks.</p>
+
+<p>(3 choose 2) * (3 choose 0) * (3 choose 2) * (31 choose 0) / (40 choose 5) = 0.00000455921.</p>
+<p>(3 choose 2) * (3 choose 0) * (3 choose 0) * (31 choose 2) / (40 choose 5) = 0.00070667833.</p>
+
+<p>By doing 2 separate combinatorics problems, this algorithm is able to give exact probabilities without simulation.</p>
+
+<p>Let's say you want to calculate the probability of "3A + 2 of anything else".
+We first generate all compositions the deck and then see which ones match that criteria of having 3As.
+Then we just count the number of combinations, add them up, and divide by (40 choose 5).</p>
+
+<p>For this specific example they would be:</p>
+<ul>
+<li>[3, 0, 0, 2] -> 465</li>
+<li>[3, 0, 1, 1] -> 93</li>
+<li>[3, 1, 0, 1] -> 93</li>
+<li>[3, 0, 2, 0] -> 3</li>
+<li>[3, 1, 1, 0] -> 9</li>
+<li>[3, 2, 0, 0] -> 3</li>
+</ul>
+
+<p>sum = 465 + 93 + 93 + 3 + 9 + 3 = 666</p>
+<p>probability = 666 / (40 choose 5) = 0.00101214574</p>
+
+<p>Plugging this into a hyper geometric calculator such as <a href="https://www.yugioh.party/" target="_blank">https://www.yugioh.party/</a> gives the same answer of 0.10%.</p>
+
+<p>The main advantage of this method is that you can check for multiple of hands and account for their overlaps.
+For example, your deck could have 1-card starters and 2-card combos.</p>
+
+<p>Your "live" hands could be:</p>
+<ul>
+<li>"1A + anything else" OR</li>
+<li>"2Bs" OR</li>
+<li>"1B + 1C"</li>
+</ul>
+
+<p>This type of problem would be impossible to solve with the usual hypergeometric calculator.</p>
+<p>You could try to solve for this by drawing a tree but then you could easily make a mistake in the calculation; hands with "1A + anything else" will overlap witih "2Bs".</p>
+
+<p>This algorithm would first generate all the compositions and then filter them to keep anything that matches any of the patterns.</p>
+<p>Then it would count the combinations of the valid compositions and add them up.</p>
+<p>This completely avoids any doubling counting of compositions that match two patterns.</p>
+
+</main>
+</body>
+</html>

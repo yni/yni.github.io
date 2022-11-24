@@ -1,0 +1,80 @@
+:root {
+  --gridSize: 5;
+  --gridHeight: 60px;
+  --gridWidth: 60px;
+}
+
+span {
+/*
+	display: inline-block;
+	width: 50px;
+	width: 50px;
+	height: 50px;
+*/
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+/*    margin-left: auto;
+    margin-right: auto;
+*/
+ }
+
+.grid_output {
+  display: grid;
+  grid-template-rows: repeat(var(--gridSize), var(--gridHeight));
+/*  grid-template-columns: repeat(var(--gridSize), auto);*/
+  grid-template-columns: repeat(var(--gridSize), var(--gridWidth));
+}
+
+.grid_item {
+  grid-column-start: auto;
+  grid-row-start: auto;
+  margin: 5px;
+}
+
+.combo_input {
+	background-color: dodgerblue;
+/*	border: 1px dotted #1C6EA4;*/
+}
+
+.combo_header {
+	background-color: lightgreen;
+}
+
+.combo_filler {
+/*    border-bottom: dotted 3px orange;*/
+}
+
+input.combo_checkbox {
+	width: 50px;
+	height: 50px;
+}
+
+body {
+    background-color: yellow;
+}
+p {
+    text-align: left;
+}
+h1 {
+    text-align: center;
+}
+a {
+    color:  black;
+}
+table, th, td {
+  border: 0.5px solid;
+}
+
+table.bdrless td{
+    border-width: 0px;
+}
+
+table.bdrlessinputs td{
+    border-width: 0px;
+    vertical-align: top;
+}
+
+table.bdr td{
+   border: 0.5px solid;
+}

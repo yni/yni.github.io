@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>Two-Card Combo Calculator</title>
+  <link rel="stylesheet" type="text/css" href="two_card_combos.css">
+  <script type="text/javascript" src="basic_math.js"></script>
+  <script type="text/javascript" src="basic_output.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" src="constrained_composition.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1>Two-Card Combo Calculator</h1>
+  </header>
+  
+  <main>
+    <p>See <b><a href="composition_math.html" target="_blank">this explanation</a></b> for the underlying algorithm that calculates the probabilities.</p>
+    <form>
+      <input type="button" value="Add Card" class="add_card">
+      <input type="button" value="Reset Deck" onclick="resetDeck()">
+      <input type="button" value="Draw Grid" onclick="drawGrid()">
+      <input type="button" value="Update Probability" onclick="calculateTierProbabilities()">  
+    </form>
+    <p>Use the "+/- Card Count" input to change ratios and do a comparison.</p>
+    <p>Click "Draw Grid" to dynamically create a 2-card combo table.</p>
+    <div class="deck_list">
+      Card Name, Card Count, +/- Card Count
+      <form class="card">
+        <input type="text" placeholder="blanks" id="blank_card_name" class="card_name"><input type="number" value=40 min=0 id="blank_card_count" class="card_count"><input type="number" value=0 id="blank_card_count_delta" class="card_count_delta">
+      </form>
+    </div>
+    <br>
+    <p>2-Card Combo Chart</p>
+    <p>Check the boxes for the card combos that are "live"."</p>
+    <p>Then, click "Update Probability" to run the calc.</p>
+    <div id="grid_output" border="10" bordercolor = "#0B1941" class="grid_output">
+    </div>
+    <script src="two_card_combos.js"></script>
+    <br>
+
+      <table style="width:100%" class="bdrless">
+          <tr><td>
+              <canvas id="barGraphOutput" style="width:100%;max-width:700px;border:1px solid;max-height:500px"></canvas>
+          </td>
+          <td>
+              <table id="probabilityTableOutput" class="bdr"></table>
+          </td>
+          </tr>
+          <tr><td>
+              <canvas id="differenceGraphOutput" style="width:100%;max-width:700px;border:1px solid;max-height:500px"></canvas>
+          </td>
+          <td>
+              <table id="differenceTableOutput" class="bdr"></table>
+          </td>
+          </tr>
+      </table>
+
+  </main>
+</body>
+</html>
