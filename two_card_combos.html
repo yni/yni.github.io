@@ -16,27 +16,36 @@
   
   <main>
     <p>See <b><a href="composition_math.html" target="_blank">this explanation</a></b> for the underlying algorithm that calculates the probabilities.</p>
+    <p> How to use this Calculator:</p>
+    <ol>
+      <li>Click "Add Cards" to add cards to the deck.</li>
+      <li>Adjust the Card Count as necessary.</li>
+      <li>(Optional: Use the "+/- Card Count" input to change ratios and do a comparison.)</li>
+      <li>Click "Draw Grid" to dynamically create a 2-card combo table.</li>
+      <li>Check the boxes for the card combos that are "live"."</li>
+      <li>Click "Update Probability" to run the calc.</li>
+      </ol>
     <form>
       <input type="button" value="Add Card" class="add_card">
       <input type="button" value="Reset Deck" onclick="resetDeck()">
       <input type="button" value="Draw Grid" onclick="drawGrid()">
       <input type="button" value="Update Probability" onclick="calculateTierProbabilities()">  
     </form>
-    <p>Use the "+/- Card Count" input to change ratios and do a comparison.</p>
-    <p>Click "Draw Grid" to dynamically create a 2-card combo table.</p>
+        <p>Cards in Deck (this should be at least 40): <b id="card_count_total"></b></p>
+    <p>Total Changes in Card Count (this should be 0): <b id="delta_total"></b></p>
     <div class="deck_list">
       Card Name, Card Count, +/- Card Count
       <form class="card">
-        <input type="text" placeholder="blanks" id="blank_card_name" class="card_name"><input type="number" value=40 min=0 id="blank_card_count" class="card_count"><input type="number" value=0 id="blank_card_count_delta" class="card_count_delta">
+        <input type="text" placeholder="blanks" id="blank_card_name" class="card_name"><input type="number" value=40 min=0 id="blank_card_count" class="card_count" oninput="updateDeckTotal()"><input type="number" value=0 id="blank_card_count_delta" class="card_count_delta"  oninput="updateDeckTotal()">
       </form>
     </div>
+
     <br>
     <p>2-Card Combo Chart</p>
-    <p>Check the boxes for the card combos that are "live"."</p>
-    <p>Then, click "Update Probability" to run the calc.</p>
     <div id="grid_output" border="10" bordercolor = "#0B1941" class="grid_output">
     </div>
     <script src="two_card_combos.js"></script>
+    <script>updateDeckTotal()</script>
     <br>
 
       <table style="width:100%" class="bdrless">

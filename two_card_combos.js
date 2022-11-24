@@ -6,6 +6,7 @@ var comboPairs = [];
 
 function removeCard() {
   this.parentElement.remove();
+  updateDeckTotal()
 }
 
 function resetDeck() {
@@ -16,6 +17,7 @@ function resetDeck() {
   document.getElementById("blank_card_name").value = "";
   document.getElementById("blank_card_count").value = 40;
   document.getElementById("blank_card_count_delta").value = 0;
+  updateDeckTotal()
 }
 
 function addNewCard() {
@@ -29,11 +31,13 @@ function addNewCard() {
   cardCount.type = "number";
   cardCount.value = 3;
   cardCount.min = 0;
+  cardCount.setAttribute("oninput", "updateDeckTotal()");
 
   const cardCountDelta = document.createElement("input");
   cardCountDelta.className = "card_count_delta";
   cardCountDelta.type = "number";
   cardCountDelta.value = 0;
+  cardCountDelta.setAttribute("oninput", "updateDeckTotal()");
 
   const removeBtn = document.createElement("removeClass");
   removeBtn.className = "delete";
@@ -49,6 +53,7 @@ function addNewCard() {
   newCard.appendChild(cardCount);
   newCard.appendChild(cardCountDelta);
   newCard.appendChild(removeBtn);
+  updateDeckTotal()
 }
 
 addCard.addEventListener("click", addNewCard);
@@ -144,4 +149,20 @@ function calculateTierProbabilities() {
   updateProbabilityTable(output, "probabilityTableOutput");
   updateProbabilityGraph(differenceDistribution, "differenceGraphOutput", true);
   updateProbabilityTable(differenceDistribution, "differenceTableOutput", true);
+}
+
+function updateDeckTotal() {
+  var cardCountQuery = document.querySelectorAll(".card_count");
+  var cardCountQueryDelta = document.querySelectorAll(".card_count_delta");
+  var numCards = cardCountQuery.length;
+  var deckSize = 0;
+  var deltaSize = 0;
+  for (let r = 0; r < numCards; r++) {
+   deckSize += parseInt(cardCountQuery[r].value);
+   deltaSize += parseInt(cardCountQueryDelta[r].value);
+  }
+  var deckTotal = document.getElementById("card_count_total");
+  var deltaTotal = document.getElementById("delta_total");
+  deckTotal.innerHTML = deckSize.toString();
+  deltaTotal.innerHTML = deltaSize.toString();
 }
