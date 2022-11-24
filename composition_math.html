@@ -21,7 +21,7 @@ For example, [2, 1, 0, 2] represents 2A + 1B + 0C + 2Blanks.</p>
 Another caveat is that the maximum number copies of each card is "constrained" by the deck; if there only 3 copies of A in the deck, we can't allow compositions that lead with [4, ...].</p>
 
 <p>Why use compositions?
-Using compositions will trivialize the next step in calculating probabilities when combined with the next step.</p>
+Using compositions will trivialize calculating probabilities when combined with the next step.</p>
 
 <p>Let's take 3 compositions of [3, 3, 3, 31] such as [2, 1, 0, 2], [3, 0, 2, 0] and [3, 0, 0, 2].
 These are 3 distinct hands.</p>
@@ -58,12 +58,12 @@ Then we just count the number of combinations, add them up, and divide by (40 ch
 <p>sum = 465 + 93 + 93 + 3 + 9 + 3 = 666</p>
 <p>probability = 666 / (40 choose 5) = 0.00101214574</p>
 
-<p>Plugging this into a hyper geometric calculator such as <a href="https://www.yugioh.party/" target="_blank">https://www.yugioh.party/</a> gives the same answer of 0.10%.</p>
+<p>Plugging this into a hyper geometric calculator such as <a href="https://www.yugioh.party/" target="_blank">https://www.yugioh.party/</a> gives the same answer of 0.10% for probability of opening all 3 copies of a single card.</p>
 
-<p>The main advantage of this method is that you can check for multiple of hands and account for their overlaps.
+<p>The main advantage of this method is that you can check for multiple of hand patterns and account for their overlaps.
 For example, your deck could have 1-card starters and 2-card combos.</p>
 
-<p>Your "live" hands could be:</p>
+<p>Your "live" hand patterns could be:</p>
 <ul>
 <li>"1A + anything else" OR</li>
 <li>"2Bs" OR</li>
@@ -71,11 +71,12 @@ For example, your deck could have 1-card starters and 2-card combos.</p>
 </ul>
 
 <p>This type of problem would be impossible to solve with the usual hypergeometric calculator.</p>
-<p>You could try to solve for this by drawing a tree but then you could easily make a mistake in the calculation; hands with "1A + anything else" will overlap witih "2Bs".</p>
+<p>You could try to solve for this by drawing a tree but then you could easily make a mistake in the calculation; hands with "1A + anything else" will overlap with "2Bs".</p>
 
 <p>This algorithm would first generate all the compositions and then filter them to keep anything that matches any of the patterns.</p>
-<p>Then it would count the combinations of the valid compositions and add them up.</p>
-<p>This completely avoids any doubling counting of compositions that match two patterns.</p>
+<p>Then it would count the combinations of the valid compositions and add them up to get the exact probability.</p>
+<p>This avoids doubling counting of compositions that match two patterns.</p>
+<p>This idea can be further extended concepts of hand "tiers". Instead of just "live" vs. "brick", your hands could be "the nuts", "great", "ok", and "brick". Each of these tiers would have their own sets of hand patterns. For each composition, assign it to the highest tier based on matching hand patterns. Then add up the composition combination counts for each tier to show a probability. Deck ratios result in a distribution of probability outcomes. This allows changing deck ratios to find the tradeoffs on "ceiling" vs. "consistency".</p>
 
 </main>
 </body>
