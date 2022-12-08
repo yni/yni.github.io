@@ -72,15 +72,12 @@ function calculateCombo(thisComboName, thisCombo) {
     const comboRating = $('#ctn_combo .combo .combo_name').filter(function() {return this.value == x}).closest('.combo').find('.combo_rating').val();
     comboToRatingHash[x] = parseInt(comboRating);
   });
-  console.log(comboToCardTypeHash);
 
   const cartesian = ([...a]) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
   var comboHash = {};
   for (let h = 0; h < comboNameArray.length; h++) {
     const key = comboNameArray[h];
     const value = comboToCardTypeHash[key];
-    console.log('value');
-    console.log(value);
     if (value.length >= 1) {
       var arrayArray = new Array(value.length);
       for (let i = 0; i < value.length; i++) {
@@ -113,11 +110,99 @@ function calculateCombo(thisComboName, thisCombo) {
     };
   };
   const probabilityCalc = matchToHighestTier(deckCompositions, [comboHash[thisComboName]])['1'];
-  console.log(probabilityCalc);
-  console.log(thisCombo.children('.combo_text').first().innerText);
   var outputText = '  '.concat((probabilityCalc * 100).toFixed(2).toString()).concat('%');
   thisCombo.children('.combo_text').text(outputText);
 };
+
+//this is mostly a copy and paste of calculateCombo until I change it later
+function calculateOverallProbability() {
+  const cardNameArray = listUniqueValuesByClass('card_name');
+  if (cardNameArray.length != listAllValuesByClass('card_name').length) {
+    alert('Warning: card names have duplicates. Duplicate entries are ignored.');
+  };
+  var cardNameHash = {};
+  var cardCountHash = {};
+  var orderedDeck = []
+  cardNameArray.forEach((x, i) => {
+    cardNameHash[x] = i;
+    const cardToIndexCount = countCardByName(x);
+    cardCountHash[x] = cardToIndexCount;
+    orderedDeck.push(cardToIndexCount);
+  });
+
+  const handSize = $('#hand_size').val();
+  const deckCompositions = generateCompositions(orderedDeck, handSize);
+
+  const typeNameArray = listUniqueValuesByClass('type_name');
+  var typeToCardHash = {};
+
+  typeNameArray.forEach((x, i) => {
+    typeToCardHash[x] = [];
+    $('#ctn_type .type .type_name').filter(function() {return this.value == x}).closest('.type').find('.type_multi :selected').each(function() {
+      typeToCardHash[x].push($(this)[0].innerText); //weird reference
+      //typeToCardHash[x].push($(this).attr('value'));
+    });
+  });
+
+  const comboNameArray = listUniqueValuesByClass('combo_name');
+  var comboToCardTypeHash = {};
+  var comboToRatingHash = {};
+  comboNameArray.forEach((x, i) => {
+    comboToCardTypeHash[x] = new Array();
+    $('#ctn_combo .combo .combo_name').filter(function() {return this.value == x}).closest('.combo').find('.combo_multi :selected').each(function() {
+      comboToCardTypeHash[x].push($(this)[0].innerText);
+    });
+    const comboRating = $('#ctn_combo .combo .combo_name').filter(function() {return this.value == x}).closest('.combo').find('.combo_rating').val();
+    comboToRatingHash[x] = parseInt(comboRating);
+  });
+
+  const cartesian = ([...a]) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
+  var comboHash = {};
+  for (let h = 0; h < comboNameArray.length; h++) {
+    const key = comboNameArray[h];
+    const value = comboToCardTypeHash[key];
+    if (value.length >= 1) {
+      var arrayArray = new Array(value.length);
+      for (let i = 0; i < value.length; i++) {
+        const typeCheck = value[i];
+        if (typeNameArray.includes(typeCheck)) {
+          arrayArray[i] = typeToCardHash[typeCheck];
+        } else {
+          arrayArray[i] = [typeCheck].slice();
+        };
+      };
+      var handCardNames = [];
+      if (arrayArray.length >= 2) {
+        handCardNames = cartesian(arrayArray);
+      } else {
+        handCardNames = arrayArray;
+      };
+  
+      var handCompose = new Array(handCardNames.length).fill(0);
+      for (let i = 0; i < handCompose.length; i++) {
+        var composeArray = new Array(orderedDeck.length).fill(0);
+        for (let j = 0; j < handCardNames[i].length; j++) {
+          var cardNameToIndex = handCardNames[i][j];
+          composeArray[cardNameHash[cardNameToIndex]] += 1;
+        };
+        handCompose[i] = composeArray;
+      };
+      comboHash[key] = handCompose;
+    } else {
+      comboHash[key] = [];
+    };
+  };
+  var allLiveHands = [];
+  comboNameArray.forEach((x) => {
+    allLiveHands = allLiveHands.concat(comboHash[x]);
+  });
+  const liveProbability = matchToHighestTier(deckCompositions, [allLiveHands])['1'];
+  console.log(liveProbability);
+  var liveProbabilityText = '  '.concat((liveProbability * 100).toFixed(2).toString()).concat('%');
+  $('#overall_probability').text(liveProbabilityText);
+};
+
+
 
 function mapTypeToCard() {
   var typeToCardMap = {};
