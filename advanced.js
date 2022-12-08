@@ -225,4 +225,6 @@ $(function() {
   
   //allow duplicate selection
 
+  //this adds the first card
+  $("#btn_add_card").trigger("click");
 });
