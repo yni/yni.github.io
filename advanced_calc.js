@@ -79,17 +79,26 @@ function calculateCombo(thisComboName, thisCombo) {
     const key = comboNameArray[h];
     const value = comboToCardTypeHash[key];
     if (value.length >= 1) {
+      var numTypes = 0; // Adding numTypes and numNontypes to handle edge case of just a single type.
+      var numNonTypes = 0;
       var arrayArray = new Array(value.length);
       for (let i = 0; i < value.length; i++) {
         const typeCheck = value[i];
         if (typeNameArray.includes(typeCheck)) {
           arrayArray[i] = typeToCardHash[typeCheck];
+          numTypes += 1;
         } else {
           arrayArray[i] = [typeCheck].slice();
+          numNonTypes += 1;
         };
       };
       var handCardNames = [];
-      if (arrayArray.length >= 2) {
+      if (numTypes == 1 && numNonTypes == 0) { // this is to debug single type combos paired with nothing else. being treated as AND condition when it should be OR
+        handCardNames = new Array(2);
+        for (let j = 0; j < arrayArray[0].length; j++) {
+          handCardNames[j] = [arrayArray[0][j]].slice();
+        };
+      } else if (arrayArray.length >= 2) {
         handCardNames = cartesian(arrayArray);
       } else {
         handCardNames = arrayArray;
@@ -162,17 +171,26 @@ function calculateOverallProbability() {
     const key = comboNameArray[h];
     const value = comboToCardTypeHash[key];
     if (value.length >= 1) {
+      var numTypes = 0; // Adding numTypes and numNontypes to handle edge case of just a single type.
+      var numNonTypes = 0;
       var arrayArray = new Array(value.length);
       for (let i = 0; i < value.length; i++) {
         const typeCheck = value[i];
         if (typeNameArray.includes(typeCheck)) {
           arrayArray[i] = typeToCardHash[typeCheck];
+          numTypes += 1;
         } else {
           arrayArray[i] = [typeCheck].slice();
+          numNonTypes += 1;
         };
       };
       var handCardNames = [];
-      if (arrayArray.length >= 2) {
+      if (numTypes == 1 && numNonTypes == 0) { // this is to debug single type combos paired with nothing else. being treated as AND condition when it should be OR
+        handCardNames = new Array(2);
+        for (let j = 0; j < arrayArray[0].length; j++) {
+          handCardNames[j] = [arrayArray[0][j]].slice();
+        };
+      } else if (arrayArray.length >= 2) {
         handCardNames = cartesian(arrayArray);
       } else {
         handCardNames = arrayArray;
