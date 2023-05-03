@@ -19,18 +19,29 @@ edges
 </head>
 <body>
 <p>Tree Visualizer</p>
-<p>Right click the image to "Save As".</p>
+
 <section class="container">
 <div id="col-1">
 	<button id="btn_reset" type="button">Reset All Nodes</button>
 	<button id="btn_add_node" type="button">Add Root</button>
-	<button id="btn_refresh_tree" type="button" onclick="refreshTree()">Refresh Tree</button>
 	<p>Node Name | Node Color | Node Shape | Options to Grow or Prune the Tree</p>
 	<div id="ctn_nodes"></div>
 	<div id="ctn_edges"></div>
 </div>
+<!--
 <div id="col-2">
-	<img id="tree_output">
+</div>
+-->
+<div></div>
+</section>
+<section class="container">
+<div>
+<p>Right click the image below to "Save As".</p>
+<br>
+<button id="btn_refresh_tree" type="button" onclick="refreshTree()">Update Tree Visual</button>
+<br>
+<br>
+<img id="tree_output">
 </div>
 </section>
 </body>

@@ -13,12 +13,16 @@
 /*  border: 1px solid #555; */
 }
 
+.node_name {
+  width: 30%;
+}
+
 .node_color {
-  width: 10%;
+  width: 8%;
 }
 
 .node_shape {
-  width: 13%;
+  width: 8%;
 }
 
 /*

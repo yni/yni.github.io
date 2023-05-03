@@ -4,7 +4,7 @@ https://quickchart.io/graphviz?graph=digraph{...}
 */
 
 const colorList = ['black', 'red', 'orange', 'yellow', 'green', 'blue', 'purple'];
-const shapeList = ['square', 'diamond', 'circle', 'pentagon', 'hexagon', 'Msquare', 'Mdiamond', 'Mcircle'];
+const shapeList = ['rectangle', 'diamond', 'oval', 'pentagon', 'hexagon', 'Msquare', 'Mdiamond', 'Mcircle'];
 
 function refreshTree() {
 	var imgUrl = document.getElementById('tree_output');
