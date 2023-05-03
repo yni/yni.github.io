@@ -1,0 +1,35 @@
+<!--
+nodes
+	add node and edge
+edges
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Tree Drawer</title>
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script type="text/javascript" src="tree.js"></script>
+	<script src="https://d3js.org/d3.v7.min.js"></script>
+	<script type="text/javascript" src="visualize_tree.js"></script>
+<!--	<link rel="stylesheet" href="types.css"> -->
+	<link rel="stylesheet" href="tree.css"/>
+</head>
+<body>
+<p>Tree Visualizer</p>
+<section class="container">
+<div id="col-1">
+	<button id="btn_reset" type="button">Reset All Nodes</button>
+	<button id="btn_add_node" type="button">Add Root</button>
+	<button id="btn_refresh_tree" type="button" onclick="refreshTree()">Refresh Tree</button>
+	<div id="ctn_nodes"></div>
+	<div id="ctn_edges"></div>
+</div>
+<div id="col-2">
+	<img id="tree_output">
+</div>
+</section>
+</body>
+</html>
