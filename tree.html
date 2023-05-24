@@ -7,7 +7,7 @@ edges
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Tree Drawer</title>
+	<title>Tree Visualizations</title>
 	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -18,13 +18,49 @@ edges
 	<link rel="stylesheet" href="tree.css"/>
 </head>
 <body>
-<p>Tree Visualizer</p>
-
+<h2>Tree Visualizations with Graphviz</h2>
+<p>This page provides an user interface for generating <a href="https://graphviz.org/" target = "_blank">Graphviz</a> scripts.</p>
+<p>Use the options below to customize your tree using some of the attributes offered by Graphviz.</p>
+<table>
+	<tr style = "vertical-align: top">
+	<td>
+	graph
+	<ul>
+		<li>layout</li>
+		<li>rankdir</li>
+	</ul>
+	</td>
+	<td>
+	node
+	<ul>
+		<li>label</li>
+		<li>color</li>
+		<li>shape</li>
+	</ul>
+	</td>
+	<td>
+	edge
+	<ul>
+		<li>label</li>
+		<li>style</li>
+		<li>direction</li>
+	</ul>
+	</td>
+	<td> escape characters for labels
+	<ul>
+		<li>new line \n</li>
+		<li>double quotes \"</li>
+		<li>percent symbol %25</li>
+		<li>plus sign %2B</li>
+	</ul>
+	</td>
+	</tr>
+</table>
 <section class="container">
 <div id="col-1">
+	<br>
 	<button id="btn_reset" type="button">Reset All Nodes</button>
 	<button id="btn_add_node" type="button">Add Root</button>
-	<p>Node Name | Node Color | Node Shape | Options to Grow or Prune the Tree</p>
 	<div id="ctn_nodes"></div>
 	<div id="ctn_edges"></div>
 </div>
@@ -34,11 +70,34 @@ edges
 -->
 <div></div>
 </section>
+<br>
 <section class="container">
 <div>
-<p>Right click the image below to "Save As".</p>
+<p>Click "Update Tree Visual" button to render the tree as an image. Right click the image to "Save Image As".</p>
+<p>Click the "Edit with Graphviz Online" link to further customize the current Graphviz script in an online editor.</p>
 <br>
 <button id="btn_refresh_tree" type="button" onclick="refreshTree()">Update Tree Visual</button>
+<a id="graphviz_online" class="btn btn-success" href="https://dreampuf.github.io/GraphvizOnline/" target="_blank">Edit with Graphviz Online</a>
+<br>
+<br>
+	graph layout:
+	<select class="graph_layout" name="layout" id = "layout">
+	  <option value="dot">dot</option>
+	  <option value="neato">neato</option>
+	  <option value="twopi">twopi</option>
+	  <option value="circo">circo</option>
+	  <option value="fdp">fdp</option>
+	</select>
+	More detailed explanation of layouts <a href = "https://rdrr.io/bioc/Rgraphviz/man/GraphvizLayouts.html">here</a>.
+	<br>
+	graph rank direction (dot layout only):
+	<select class="graph_rankdir" name="rankdir" id = "rankdir">
+	  <option value="TB">Top to Bottom</option>
+	  <option value="BT">Bottom to Top</option>
+	  <option value="LR">Left to Right</option>
+	  <option value="RL">Right to Left</option>
+	</select>
+	<br>
 <br>
 <br>
 <img id="tree_output">

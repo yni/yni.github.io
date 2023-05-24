@@ -11,7 +11,7 @@ function listUniqueValuesByClass(className) {
 
 //get the max value to increment by 1 for index
 function getMaxByPattern(inputArray, pattern) {
-  var patternMatches = inputArray.filter(x => x.startsWith(pattern)).map(y => parseInt(y.replace(pattern, '')));
+  const patternMatches = inputArray.filter(x => x.startsWith(pattern)).map(y => parseInt(y.replace(pattern, '')));
   var maxMatch = 0;
   patternMatches.forEach((x) => {
     if (x > maxMatch) {
@@ -23,7 +23,8 @@ function getMaxByPattern(inputArray, pattern) {
 
 function updateEdges() {
   const currentNodeNumbers = listUniqueValuesByClass('node_number');
-  $('#ctn_edges .edge').each(function() {
+//  $('#ctn_edges .edge').each(function() {
+  $('.edge').each(function() {
     const edgeFrom = $(this).children('.edge_from').val();
     const edgeTo = $(this).children('.edge_to').val()
     if (currentNodeNumbers.includes(edgeFrom) && currentNodeNumbers.includes(edgeTo)) {
@@ -35,7 +36,8 @@ function updateEdges() {
 
 function findToNodeNumbers(inputFrom) {
   var outputTo = [];
-  $('#ctn_edges .edge').each(function() {
+//  $('#ctn_edges .edge').each(function() {
+  $('.edge').each(function() {    
     const edgeFrom = $(this).children('.edge_from').val();
     const edgeTo = $(this).children('.edge_to').val()
     if (edgeFrom == inputFrom) {
@@ -57,6 +59,9 @@ function removeNode(nodeToRemove) {
 $(function() {
   //jquery methods go here
 
+  $('.graph_layout').select2();
+  $('.graph_rankdir').select2();
+
   //basic controls
   //add node
   $('#btn_add_node').click(function() {
@@ -67,7 +72,9 @@ $(function() {
     nodeName.classList.add('node_name');
     nodeName.setAttribute('type', 'text');
     var nodeIndex = getMaxByPattern(listUniqueValuesByClass('node_number'), '') + 1 ;
-    nodeName.setAttribute('value', 'node' + nodeIndex.toString());
+//    nodeName.setAttribute('value', 'node' + nodeIndex.toString());
+    nodeName.setAttribute('placeholder', 'node' + nodeIndex.toString());
+
 
     var nodeNumber = document.createElement('input');
     nodeNumber.classList.add('node_number');
@@ -85,7 +92,7 @@ $(function() {
     var btnAddNode = document.createElement('button');
     btnAddNode.classList.add('btn_add_node');
     btnAddNode.setAttribute('type', 'button');
-    btnAddNode.innerText = 'add branch';
+    btnAddNode.innerText = 'add edge';
 
     var btnRemoveNode = document.createElement('button'); //button
     btnRemoveNode.setAttribute('type', 'button');
@@ -113,7 +120,7 @@ $(function() {
     updateShapeOptions();
 
     $('#ctn_nodes .node .btn_add_node').last().click(function() {
-      var fromNodeNumber = $(this).closest('.node').children('.node_number').val();
+      const fromNodeNumber = $(this).closest('.node').children('.node_number').val();
       addNodeEdge(fromNodeNumber);
     });
 
@@ -149,22 +156,77 @@ $(function() {
 
   function addNodeEdge(fromNodeNumber) {
     $('#btn_add_node').trigger('click');
-    var toNodeNumber = $('#ctn_nodes .node .node_number').last().val();
+    const toNodeNumber = $('#ctn_nodes .node .node_number').last().val();
+    //const toNode = $('#ctn_nodes .node').last();
+    //alert(toNode);
+
     var edge = document.createElement('div');
     edge.classList.add('edge');
-    edge.setAttribute('type', 'hidden');
+//    edge.setAttribute('type', 'hidden');
 
-    var edgeFrom = document.createElement('option');
+    var edgeLabel = document.createElement('input');
+    edgeLabel.classList.add('edge_label');
+    edgeLabel.setAttribute('type', 'text');
+    edgeLabel.setAttribute('placeholder', 'edge label to node' + toNodeNumber);
+    edgeLabel.setAttribute('value', '');
+
+    var edgeStyle = document.createElement('select');
+    edgeStyle.classList.add('edge_style');
+    edgeStyle.setAttribute('single', 'single');
+
+    var edgeDirection = document.createElement('select');
+    edgeDirection.classList.add('edge_direction');
+    edgeDirection.setAttribute('single', 'single');
+
+    var edgeFrom = document.createElement('input');
     edgeFrom.classList.add('edge_from');
     edgeFrom.setAttribute('value',fromNodeNumber);
+    edgeFrom.setAttribute('type', 'hidden');
 
-    var edgeTo = document.createElement('option');
+    var edgeTo = document.createElement('input');
     edgeTo.classList.add('edge_to');
     edgeTo.setAttribute('value', toNodeNumber);
+    edgeTo.setAttribute('type', 'hidden');
 
+
+    edge.appendChild(edgeLabel);
+    edge.appendChild(edgeStyle);
+    edge.appendChild(edgeDirection);
     edge.appendChild(edgeFrom);
     edge.appendChild(edgeTo);
-    document.getElementById('ctn_edges').appendChild(edge);
+    var lastNode = Array.from(document.querySelectorAll('.node')).pop();
+    lastNode.appendChild(edge);
+
+    $('.edge .edge_style').last().select2();
+    $('.edge .edge_direction').last().select2();
+
+    updateStyleOptions();
+    updateDirectionOptions();
+
+  };
+
+  //adds updated options to last edge_style selector
+  function updateStyleOptions() {
+    styleList.forEach((x, i) => {
+      if (i == 0) {
+        var newOption = new Option(x, i, false, true);
+      } else {
+        var newOption = new Option(x, i, false, false);
+      };
+      $('.edge .edge_style').last().append(newOption).trigger('change');
+    });
+  };
+
+  //adds updated options to last edge_direction selector
+  function updateDirectionOptions() {
+    directionList.forEach((x, i) => {
+      if (i == 0) {
+        var newOption = new Option(x, i, false, true);
+      } else {
+        var newOption = new Option(x, i, false, false);
+      };
+      $('.edge .edge_direction').last().append(newOption).trigger('change');
+    });
   };
 
   function removeDownstreamEdges(input) {
